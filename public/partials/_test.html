@@ -30,6 +30,10 @@
         padding: 1em;
     }
 
+    a {
+        color: #3C763D;
+    }
+
 </style>
 <section class="take-test">
     <div class="col-xs-12 col-md-6 col-lg-6">
@@ -41,26 +45,25 @@
             <div  style="height: 55vh; overflow-y:scroll;">
             <div ng-repeat="question in questions" class="panel panel-success" style="margin-bottom: 1em;">
                 <!-- Default panel contents -->
-                <div class="panel-heading">{{$index+1}}) {{question.question}}</div>
+                <div class="panel-heading"  ng-click="getEachQuestion(question, $index)">{{$index+1}}) <a class="question-list" href="">{{question.question}}</a></div>
             </div>
             </div>
-
         </div>
     </div>
 
     <div class="col-xs-12 col-md-6 col-lg-6">
             <div class="question-list col-divider">
-                <h3>Question title goes here:</h3>
+                <h3>{{questions[index].question}}</h3>
                 <div style="overflow: auto; padding-bottom: 0.5em;" >
                     <div class="create-test-caption">Please enter the answer below:</div>
                 </div>
                 <div style="overflow: auto; padding-bottom: 1em;">
-                    <button type="button" class="btn btn-success submit-test" ng-click="">Submit Test</button>
+                    <button type="button" class="btn btn-success submit-test" data-toggle="confirmation"  ng-click="submitTest()">Submit Test</button>
                 </div>
                 <div>
-                    <textarea name="" id="" class="form-control" rows="15" style="margin-bottom: 1em;"></textarea>
-                    <a class="btn btn-primary btnNext" ><< prev</a>
-                    <a class="btn btn-primary btnPrevious" style="float: right;" >next >></a>
+                    <textarea name="" id="" class="form-control" rows="15" style="margin-bottom: 1em;" placeholder="answer..." ng-change="updateAnswer()"  ng-model="answer">{{answer}}</textarea>
+                    <a class="btn btn-primary btnNext" ng-click="previous()"><< prev</a>
+                    <a class="btn btn-primary btnPrevious" style="float: right;" ng-click="next()">next >></a>
                 </div>
             </div>
         </div>

@@ -15,7 +15,8 @@ angular.module('createTest.questions', []).service('Question', function ($http) 
             var testObject = {
                 title:  title,
                 tags: tags,
-                questions: questions
+                questions: questions,
+                userAnswers: []
             };
             return $http.post('/tests', testObject);
         }

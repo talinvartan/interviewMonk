@@ -7,11 +7,19 @@ var TestModel = mongoose.model('Test', {
     title: String,
     tags: String,
     questions: SchemaTypes.Mixed,
+    userAnswers: SchemaTypes.Mixed,
     user: SchemaTypes.Mixed
 });
 
 router.post('/', function (req, res) {
     (new TestModel(req.body)).save(function (err, result) {
+        if (err) res.status(500).json(err);
+        else res.status(200).json(result);
+    });
+});
+
+router.put('/:id', function(req, res) {
+    TestModel.findByIdAndUpdate(req.params.id, req.body, function (err, result) {
         if (err) res.status(500).json(err);
         else res.status(200).json(result);
     });

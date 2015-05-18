@@ -1,12 +1,12 @@
 angular.module('tests', []).service('Test', function ($http) {
-    return {
-        getAll: function() {
-            return $http.get('/tests');
-        },
-        getTest: function(testid) {
-            return $http.get('/tests/' + testid);
+        return {
+            getAll: function() {
+                return $http.get('/tests');
+            },
+            getTest: function(testid) {
+                return $http.get('/tests/' + testid);
+            }
         }
-    }
 }).filter('split', function () {
     return function (tagstring) {
         return tagstring.split(',');
@@ -21,7 +21,9 @@ angular.module('tests', []).service('Test', function ($http) {
         $scope.tests = data;
     });
 }).controller('TestController', function ($scope, Test, $routeParams) {
+
     Test.getTest($routeParams.id).success(function(data) {
 
     });
+
 });
